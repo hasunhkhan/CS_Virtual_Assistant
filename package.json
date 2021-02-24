@@ -1,0 +1,24 @@
+{
+  "name": "cs_virtual_assistant",
+  "version": "1.0.0",
+  "description": "df implementation",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hasunhkhan/CS_Virtual_Assistant.git"
+  },
+  "author": "julian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hasunhkhan/CS_Virtual_Assistant/issues"
+  },
+  "homepage": "https://github.com/hasunhkhan/CS_Virtual_Assistant#readme",
+  "dependencies": {
+    "@google-cloud/dialogflow": "^3.3.0",
+    "express": "^4.17.1",
+    "uuid": "^8.3.2"
+  }
+}
