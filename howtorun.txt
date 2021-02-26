@@ -1,0 +1,7 @@
+To run:
+  Install nodejs
+  Run command to install dependencies: npm install
+  Paste json data into my-key.json
+  Set environment variables see envcredentials.txt
+  Run command to start server: node app.js
+  Open web browser to specified port in app.js
