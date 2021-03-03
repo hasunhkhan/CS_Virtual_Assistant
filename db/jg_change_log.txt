@@ -1,0 +1,13 @@
+2/16/2021
+- created db version 1
+
+3/3/2021
+- updated db file
+  - added counselor and userinfo tables
+  - updated student table to not store passwords
+  - added fuction for adding new users
+- updated insert file
+  - test data for userinfo and counselor
+  - student test data updated to no longer have passwords
+- updated cleanup file
+  - now removes userinfo and counselor tables
