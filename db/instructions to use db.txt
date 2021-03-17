@@ -1,0 +1,26 @@
+//set up database
+1. log into psql
+2. run spdb.sql and insert.sql
+
+//run program
+//sets up the directory for use of javafiles
+1. JAVAHOME=/home/stu/<username>/<current directory> export JAVAHOME
+//allows the program access to the class files in the .jar file
+2. CLASSPATH=$CLASSPATH:$PWD/javafiles.jar export CLASSPATH
+//compile java program into .class file
+3. javac EmbeddedSQL.java
+//this command connects the program to the user's database
+4. java EmbeddedSQL <username> <username> <psql password>
+
+example: 
+	JAVAHOME=/home/stu/jgaede/seniorproject export JAVAHOME
+	CLASSPATH=$CLASSPATH:$PWD/javafiles.jar export CLASSPATH
+	javac EmbeddedSQL.java
+	java EmbeddedSQL jgaede jgaede 'fakepassword123'
+                                       (the password must have ' ' around it)
+
+//using the program
+to use the program enter a number corresponding to one of the commands.
+the commands on page 1 display information that is stored in the database.
+the commands on page 2 are for adding/removing elements from the database, 
+    but right now the commands for removing data do not work.

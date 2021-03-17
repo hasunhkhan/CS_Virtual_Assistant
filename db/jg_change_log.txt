@@ -11,3 +11,21 @@
   - student test data updated to no longer have passwords
 - updated cleanup file
   - now removes userinfo and counselor tables
+
+3/16/2021
+- updated spdb.sql
+  - removed professor name from CLASS table
+  - removed sid from student
+    - doesnt make sense to have id numbers of other students
+  - removed department info table
+    - currently not being used, might revisit in future
+  - added grades view
+    - shows grades from all classes in one spot
+  - added functions for adding new data to db:
+	addstudent, addprof, addcoun, addclass
+- EmbeddedSQL.java
+  - test environment for embedded sql statements
+  - menu of different commands for the user
+  - page 1 involves commands to display information
+  - page 2 involves commands to add/remove information
+    - removal functions not yet implemented

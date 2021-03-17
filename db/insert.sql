@@ -1,9 +1,9 @@
 INSERT INTO USERINFO VALUES
-('John', 'John117@test.edu', '?7vhKa', 925368662)
+('John', 'John117@test.edu', '?7vhKa', 925368662);
 
 INSERT INTO STUDENT VALUES
-('Glenn','Glenn107@test.edu', 327673926),
-('Steven','Steven101@test.edu', 578886171);
+('Glenn','Glenn107@test.edu'),
+('Steven','Steven101@test.edu');
 
 INSERT INTO PROFESSOR VALUES
 ('Gary', 'Gary12@test.edu', 101, 'calculus'),
@@ -13,6 +13,6 @@ INSERT INTO COUNSELOR VALUES
 ('Linda', 'Linda123@test.edu', 110);
 
 INSERT INTO CLASS VALUES
-('calculus', 0630, 't, th', 'Gary', '10:30-12:40', 0101, 1200-04),
-('Computer programming', 0500, 'm, w, f', 'Sharla', '5:00-7:40', 0220, 2120-06);
+('calculus', 0630, 't, th', '10:30-12:40', 0101, 1200-04, 85),
+('Computer programming', 0500, 'm, w, f', '5:00-7:40', 0220, 2120-06, 92);
 
