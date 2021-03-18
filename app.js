@@ -6,6 +6,21 @@ const express = require("express");
 const https = require("https");
 const app = express();
 
+const { WebhookClient } = require("dialogflow-fulfillment");
+const { test } = require(__dirname+"/testdf");
+
+const db = require(__dirname+"/db/queries");
+app.post("/testdb", db.testQuery);
+
+//route to handle dialogflow post requests
+app.post("/dialogflow", express.json(),(req, res) =>{
+  console.log("test");
+
+  const agent = new WebhookClient({ request: req, response: res });
+  let intentMap = new Map();
+  intentMap.set("test", test);
+  agent.handleRequest(intentMap);
+});
 
 //body parser
 app.use(express.urlencoded({extended: true}));
@@ -47,7 +62,7 @@ app.post("/", async function(req, res){
 async function runSample(projectId= "csubassistant-jnvv", text) {
   // A unique identifier for the given session
   const sessionId = uuid.v4();
-
+  console.log("test1")
   // Create a new session
   const sessionClient = new dialogflow.SessionsClient();
   const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
@@ -66,7 +81,7 @@ async function runSample(projectId= "csubassistant-jnvv", text) {
   };
 
   // Send request and log result
-  const responses = await sessionClient.detectIntent(request);
+  const responses = await sessionClient.detectIntent(request);// this is when df does post request?
   console.log('Server side Detected intent');
   const result = responses[0].queryResult;
   console.log(`Server side Query: ${result.queryText}`);
