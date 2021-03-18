@@ -4,47 +4,42 @@ const dialogflow = require('@google-cloud/dialogflow');
 const uuid = require('uuid');
 const express = require("express");
 const https = require("https");
-const app = express();
-
 const { WebhookClient } = require("dialogflow-fulfillment");
-const { test } = require(__dirname+"/testdf");
 
-const db = require(__dirname+"/db/queries");
-app.post("/testdb", db.testQuery);
+//include files
+const { test } = require(__dirname+"/dialogflow_functions");
 
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(express.static(__dirname + "/public"));
+//db test app.post("/testdb", db.testQuery);
+
+//******************ROUTES****************************************************//
 //route to handle dialogflow post requests
-app.post("/dialogflow", express.json(),(req, res) =>{
-  console.log("test");
-
+app.post("/dialogflow",(req, res) =>{
+  console.log("In post request");
   const agent = new WebhookClient({ request: req, response: res });
   let intentMap = new Map();
+  //mapping intents with functions
   intentMap.set("test", test);
   agent.handleRequest(intentMap);
 });
-
-//body parser
-app.use(express.urlencoded({extended: true}));
-//include public files
-app.use(express.static(__dirname + "/public"));
 //on HTTP get
-app.get("/", function(req, res){
-  console.log("New get request");
+app.get("/", (req, res) =>{
   res.sendFile(__dirname+"/public/index.html");
 })
-
-app.listen(3000, function(){
-  console.log("Server running on port 3000\n");
-})
-
 //On post
 app.post("/", async function(req, res){
     const query = req.body.text;
-
     const projectId= "csubassistant-jnvv";
     const response = await runSample(projectId, query);
     res.send(response);
 });
-
+//****************************************************************************//
+app.listen(3000, function(){
+  console.log("Server running on port 3000\n");
+})
 //runSample provided by google
 // Copyright 2017 Google LLC
 //
@@ -62,11 +57,10 @@ app.post("/", async function(req, res){
 async function runSample(projectId= "csubassistant-jnvv", text) {
   // A unique identifier for the given session
   const sessionId = uuid.v4();
-  console.log("test1")
+  console.log("In runSample")
   // Create a new session
   const sessionClient = new dialogflow.SessionsClient();
   const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
-
   // The text query request.
   const request = {
     session: sessionPath,
@@ -79,7 +73,6 @@ async function runSample(projectId= "csubassistant-jnvv", text) {
       },
     },
   };
-
   // Send request and log result
   const responses = await sessionClient.detectIntent(request);// this is when df does post request?
   console.log('Server side Detected intent');
@@ -91,8 +84,7 @@ async function runSample(projectId= "csubassistant-jnvv", text) {
     console.log(`  Intent: ${result.intent.displayName}`);
   } else {
     console.log(`  No intent matched.`);
-  }
-  */
-  let responseText = await result.fulfillmentText;
-  return await responseText;
+  }*/
+  let responseText = result.fulfillmentText;
+  return responseText;
 }
