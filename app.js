@@ -6,8 +6,9 @@ const express = require("express");
 const https = require("https");
 const { WebhookClient } = require("dialogflow-fulfillment");
 
-//include files
-const { test } = require(__dirname+"/dialogflow_functions");
+//include functions
+const { test, gpa, counselor, professor
+  , allGrades, userInfo } = require(__dirname+"/dialogflow_functions");
 
 const app = express();
 app.use(express.json());
@@ -17,18 +18,27 @@ app.use(express.static(__dirname + "/public"));
 
 //******************ROUTES****************************************************//
 //route to handle dialogflow post requests
+//need to use ngrok because dialogflow requires
+//a public https ip
 app.post("/dialogflow",(req, res) =>{
   console.log("In post request");
   const agent = new WebhookClient({ request: req, response: res });
   let intentMap = new Map();
   //mapping intents with functions
   intentMap.set("test", test);
+  intentMap.set("GPA", gpa);
+  intentMap.set("counselor", counselor);
+  intentMap.set("professor", professor);
+  intentMap.set("allGrades", allGrades);
+  intentMap.set("userInfo", userInfo);
   agent.handleRequest(intentMap);
 });
+
 //on HTTP get
 app.get("/", (req, res) =>{
   res.sendFile(__dirname+"/public/index.html");
 })
+
 //On post
 app.post("/", async function(req, res){
     const query = req.body.text;
@@ -36,6 +46,7 @@ app.post("/", async function(req, res){
     const response = await runSample(projectId, query);
     res.send(response);
 });
+
 //****************************************************************************//
 app.listen(3000, function(){
   console.log("Server running on port 3000\n");
