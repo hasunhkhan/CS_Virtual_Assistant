@@ -286,19 +286,18 @@ public class EmbeddedSQL {
 			default : System.out.println("Unrecognized choice!"); break;
               }
 	 } if(p == 1) {
-	     	 System.out.println("Not all commands work yet");
 		 System.out.println("\nPage 2");
                  System.out.println("---------");
                  System.out.println("1. Add Professor");
                  System.out.println("2. Add Counselor");
                  System.out.println("3. Add Student");
               	 System.out.println("4. Add Class");
+		 System.out.println("commands 5-9 are case sensitive");
                  System.out.println("5. Remove Professor");
 		 System.out.println("6. Remove Counselor");
 		 System.out.println("7. Remove Student");
 		 System.out.println("8. Remove class");
-		 System.out.println("9. ");
-		 System.out.println("10. page 1");
+		 System.out.println("9. page 1");
                  System.out.println("0. Exit");
 		 switch (readChoice())
                  {
@@ -318,10 +317,9 @@ public class EmbeddedSQL {
 			case 7:   p2_Query7(esql); break;
 			     //remove class
 			case 8:   p2_Query8(esql); break;
-			     //user info
-			case 9:   p2_Query9(esql); break;
-		   	     //exit
-			case 10:  p = 0; break;
+		   	     //return to page 1
+			case 9:  p = 0; break;
+		 	     //exit
 			case 0:   keepon = false; break;
 			default : System.out.println("Unrecognized choice!"); break;
 		 }
@@ -667,7 +665,11 @@ public class EmbeddedSQL {
      public static void p2_Query5(EmbeddedSQL esql)
      {
         try{
-       String query = "select * from student;";
+        System.out.println("Enter Professor Name: ");
+	String input = in.readLine();
+	String query = "select RemoveProfessor('";
+	query += input;
+	query += "')";
 
         int rowcount = esql.executeQuery (query);
         System.out.println ("total row(s): " + rowcount);
@@ -682,7 +684,11 @@ public class EmbeddedSQL {
      public static void p2_Query6(EmbeddedSQL esql)
      {
         try{
-       String query = "select * from class;";
+        System.out.println("Enter Counselor Name: ");
+	String input = in.readLine();
+	String query = "select RemoveCounselor('";
+	query += input;
+	query += "')";
 
         int rowcount = esql.executeQuery (query);
         System.out.println ("total row(s): " + rowcount);
@@ -697,7 +703,11 @@ public class EmbeddedSQL {
      public static void p2_Query7(EmbeddedSQL esql)
      {
         try{
-      String query = "select * from schedule";
+        System.out.println("Enter Student Name: ");
+	String input = in.readLine();
+	String query = "select RemoveStudent('";
+	query += input;
+	query += "')";
 
         int rowcount = esql.executeQuery (query);
         System.out.println ("total row(s): " + rowcount);
@@ -712,21 +722,11 @@ public class EmbeddedSQL {
      public static void p2_Query8(EmbeddedSQL esql)
      {
 	try{
-      String query = "select * from grades;";
-
-        int rowcount = esql.executeQuery (query);
-        System.out.println ("total row(s): " + rowcount);
-        
-	}catch(Exception e)
-        {
-          System.err.println (e.getMessage ());
-        }
-     }
-     //user info
-     public static void p2_Query9(EmbeddedSQL esql)
-     {
-	try{
-      String query = "select * from userinfo;";
+        System.out.println("Enter Class Name: ");
+	String input = in.readLine();
+	String query = "select RemoveClass('";
+	query += input;
+	query += "')";
 
         int rowcount = esql.executeQuery (query);
         System.out.println ("total row(s): " + rowcount);

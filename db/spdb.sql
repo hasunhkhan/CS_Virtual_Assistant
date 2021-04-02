@@ -105,3 +105,39 @@ begin
 end;
 $$
 LANGUAGE plpgsql;
+
+create function RemoveStudent(nS_Name varchar(32))
+returns void as $$
+begin
+    DELETE FROM STUDENT
+    WHERE S_Name = nS_Name;
+end;
+$$
+LANGUAGE plpgsql;
+
+create function RemoveProfessor(nP_Name varchar(32))
+returns void as $$
+begin
+    DELETE FROM PROFESSOR
+    WHERE P_Name = nP_Name;
+end;
+$$
+LANGUAGE plpgsql;
+
+create function RemoveCounselor(nC_Name varchar(32))
+returns void as $$
+begin
+    DELETE FROM COUNSELOR
+    WHERE C_Name = nC_Name;
+end;
+$$
+LANGUAGE plpgsql;
+
+create function RemoveClass(nCName varchar(32))
+returns void as $$
+begin
+    DELETE FROM Class
+    WHERE CName = nCName;
+end;
+$$
+LANGUAGE plpgsql;

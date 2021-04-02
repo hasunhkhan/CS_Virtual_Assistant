@@ -29,3 +29,9 @@
   - page 1 involves commands to display information
   - page 2 involves commands to add/remove information
     - removal functions not yet implemented
+
+4/1/2021
+- updated spdb.sql
+  - added four functions that allow removal of data from the db
+- updated EmbeddedSQL.java
+  - all of the queries are working now
