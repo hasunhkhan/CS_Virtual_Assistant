@@ -14,7 +14,7 @@ const BOT_MSGS = [
 const BOT_IMG = "https://marshall-data-bucket-production.s3.amazonaws.com/csuBakersfieldRetention/c7ad49be69f0493e98d60e5308616847.png";
 // Icon created by itim2101 on Flaticon.com
 const PERSON_IMG = "https://www.flaticon.com/svg/vstatic/svg/4462/4462643.svg?token=exp=1617668924~hmac=f7744ea041efd8f207c0e208dd263543";
-const BOT_NAME = "";
+const BOT_NAME = "Virtual Assistant";
 const PERSON_NAME = "Me";
 
 msgerForm.addEventListener("submit", event => {

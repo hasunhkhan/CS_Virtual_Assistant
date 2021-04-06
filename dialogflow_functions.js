@@ -1,7 +1,7 @@
 //functions for dialogflow and db queries
 //queries would be different for each STUDENT
 //currently only working for default. Would need to have a login page or
-// something to select a valid student then change queries to match respective student
+//something to select a valid student then change queries to match respective student
 
 async function test(agent){//with 'agent' obj can grab params
   try{

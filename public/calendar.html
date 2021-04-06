@@ -5,7 +5,6 @@
     <link href='CSS/calendar.css' rel='stylesheet' />
     <script src='lib/main.js'></script>
     <script>
-
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -17,6 +16,10 @@
     </script>
   </head>
   <body>
+    <div class="container-fluid row">
+      <div id='calendar1' class='calendar col-md-8'></div>
+      <div id='calendar2' class='calendar col-md-4'></div>
+    </div>
     <div id='calendar'></div>
   </body>
 </html>
