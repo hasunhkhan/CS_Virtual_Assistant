@@ -18,7 +18,7 @@
   "homepage": "https://github.com/hasunhkhan/CS_Virtual_Assistant#readme",
   "dependencies": {
     "@google-cloud/dialogflow": "^3.3.0",
-    "actions-on-google": "^1.2.1",
+    "actions-on-google": "^2.4.1",
     "dialogflow-fulfillment": "^0.6.1",
     "express": "^4.17.1",
     "uuid": "^8.3.2"
