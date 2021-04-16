@@ -31,15 +31,40 @@ msgerForm.addEventListener("submit", event => {
     data: {text: msgText},
     success: function(response){
       console.log(response.includes("https"));
-      botResponse(response);
+      var urlHtml;
+      var url = false;
+      if(response.includes("https")){
+        var urlHtml = regexUrl(response);
+        var url = true;
+      }
+      console.log(urlHtml);
+      botResponse(response, urlHtml, url);
     }
   });
   msgerInput.value = "";
 });
 
-function appendMessage(name, img, side, text) {
+function appendMessage(name, img, side, text, urlHtml, url) {
   //   Simple solution for small apps
-  const msgHTML = `
+  var msgHTML;
+  if(url){
+    msgHTML = `
+     <div class="msg ${side}-msg">
+       <div class="msg-img" style="background-image: url(${img})"></div>
+
+       <div class="msg-bubble">
+         <div class="msg-info">
+           <div class="msg-info-name">${name}</div>
+           <div class="msg-info-time">${formatDate(new Date())}</div>
+         </div>
+
+         <div class="msg-text">`+urlHtml+`</div>
+       </div>
+     </div>
+   `;
+  }
+  else{
+   msgHTML = `
     <div class="msg ${side}-msg">
       <div class="msg-img" style="background-image: url(${img})"></div>
 
@@ -53,17 +78,18 @@ function appendMessage(name, img, side, text) {
       </div>
     </div>
   `;
+  }
   msgerChat.insertAdjacentHTML("beforeend", msgHTML);
   msgerChat.scrollTop += 500;
 }
 
-function botResponse(msgText) {
+function botResponse(msgText, urlHtml, url) {
 //  const r = random(0, BOT_MSGS.length - 1);
   const msg = msgText;
   const delay = msg.split(" ").length * 100;
 
   setTimeout(() => {
-    appendMessage(BOT_NAME, BOT_IMG, "left", msg);
+    appendMessage(BOT_NAME, BOT_IMG, "left", msg, urlHtml, url);
   }, delay);
 }
 
@@ -81,4 +107,11 @@ function formatDate(date) {
 
 function random(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+function regexUrl(text){
+  var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '">' + url + '</a>';
+    });
 }
