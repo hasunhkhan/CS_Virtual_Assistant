@@ -30,6 +30,7 @@ msgerForm.addEventListener("submit", event => {
     type: 'post',
     data: {text: msgText},
     success: function(response){
+      console.log(response.includes("https"));
       botResponse(response);
     }
   });
@@ -52,7 +53,6 @@ function appendMessage(name, img, side, text) {
       </div>
     </div>
   `;
-
   msgerChat.insertAdjacentHTML("beforeend", msgHTML);
   msgerChat.scrollTop += 500;
 }
