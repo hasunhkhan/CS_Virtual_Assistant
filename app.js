@@ -37,11 +37,24 @@ app.post("/dialogflow",(req, res) =>{
 
 //on HTTP get
 app.get("/", (req, res) =>{
+  console.log("GET landing page")
   res.sendFile(__dirname+"/public/index.html");
 })
 
+//redirect here if user and pass were correct
+app.get("/home", function(req, res){
+  res.sendFile(__dirname+"/chatbot.html")
+})
+
+
+//authentication logic here
+app.post("/auth", (req,res) =>{
+  console.log(req.body.username);
+  res.redirect("/home");
+})
+
 //On post
-app.post("/", async function(req, res){
+app.post("/home", async function(req, res){
     const query = req.body.text;
     const projectId= "csubassistant-jnvv";
     const response = await runSample(projectId, query);

@@ -26,7 +26,7 @@ msgerForm.addEventListener("submit", event => {
   appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
   console.log(msgText)
   $.ajax({
-    url: '/',
+    url: '/home',
     type: 'post',
     data: {text: msgText},
     success: function(response){
@@ -122,6 +122,7 @@ $(function() {
   $('.form-control').on('input', function() {
 	  var $field = $(this).closest('.form-group');
 	  if (this.value) {
+      console.log(this.value);
 	    $field.addClass('field--not-empty');
 	  } else {
 	    $field.removeClass('field--not-empty');
