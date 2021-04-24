@@ -14,7 +14,7 @@
     <!-- Style -->
     <link rel="stylesheet" href="CSS/login.css">
 
-    <title>Login #6</title>
+    <title>CS Web Virtual Assistant</title>
   </head>
   <body>
 
@@ -30,15 +30,16 @@
               <h3>Sign In</h3>
               <p class="mb-4">Please enter your student ID and password so that the CS Virtual Assistant bot can better assist you.</p>
             </div>
-            <form action="auth" method="post">
+
+            <form action="/auth" method="post">
               <div class="form-group first">
                 <label for="username">Student ID</label>
-                <input type="text" class="form-control" id="username">
+                <input type="text" class="form-control" id="username" name = "username">
 
               </div>
               <div class="form-group last mb-3">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password">
+                <input type="password" class="form-control" id="password" name = "password">
 
               </div>
 

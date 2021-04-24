@@ -116,7 +116,7 @@ function regexUrl(text){
     });
 }
 
-$(function() {
+/*$(function() {
 	'use strict';
 
   $('.form-control').on('input', function() {
@@ -129,4 +129,4 @@ $(function() {
 	  }
 	});
 
-});
+});*/

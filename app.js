@@ -5,6 +5,10 @@ const uuid = require('uuid');
 const express = require("express");
 const https = require("https");
 const { WebhookClient } = require("dialogflow-fulfillment");
+const session = require("express-session");
+const pool = require("./db/db");
+
+
 
 //include functions
 const { test, gpa, counselor, professor
@@ -14,6 +18,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 //db test app.post("/testdb", db.testQuery);
 
 //******************ROUTES****************************************************//
@@ -43,14 +52,41 @@ app.get("/", (req, res) =>{
 
 //redirect here if user and pass were correct
 app.get("/home", function(req, res){
-  res.sendFile(__dirname+"/chatbot.html")
+  if(req.session.loggedin){
+    res.sendFile(__dirname+"/chatbot.html")
+  }else{
+    res.send("You must be logged in to view this page.")
+  }
 })
 
-
 //authentication logic here
-app.post("/auth", (req,res) =>{
+app.post("/auth", async (req,res) =>{
   console.log(req.body.username);
-  res.redirect("/home");
+  console.log(req.body.password);
+  let username = req.body.username;
+  let password = req.body.password;
+  if(username && password){
+    try{
+      var queryTest = await pool.query("SELECT * FROM USERINFO WHERE "
+      + `U_EMAIL='${username}' AND PASSWORD='${password}'`);
+      console.log(queryTest.rowCount);
+    } catch(err){
+      console.error(err.message);
+    }
+    if(queryTest.rowCount > 0){
+      req.session.loggedin = true;
+      req.session.username = username;
+      res.redirect("/home");
+    } else {
+      res.send("Incorrect user name or password!");
+    }
+    res.end();
+  } else{
+
+    res.send("Please enter your correct username and password");
+    res.end();
+  }
+
 })
 
 //On post
