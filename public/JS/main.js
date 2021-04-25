@@ -47,6 +47,7 @@ msgerForm.addEventListener("submit", event => {
 function appendMessage(name, img, side, text, urlHtml, url) {
   //   Simple solution for small apps
   var msgHTML;
+  console.log(urlHtml);
   if(url){
     msgHTML = `
      <div class="msg ${side}-msg">
@@ -112,7 +113,7 @@ function random(min, max) {
 function regexUrl(text){
   var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
     return text.replace(urlRegex, function(url) {
-        return '<a href="' + url + '">' + url + '</a>';
+        return '<a href="' + url + '\ "target=\"_blank\" >' + url + '</a>';
     });
 }
 

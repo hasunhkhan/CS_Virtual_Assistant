@@ -117,12 +117,13 @@ async function weather(agent){
           //weather saved in temp
           //access specific named values in object
           resolve(weatherData);
+          console.log(weatherData);
         });
       });
     });
   console.log(res.weather[0].main+"temp: "+res.main.temp);
   agent.add("The weather in Bakersfield currently is: "+res.weather[0].main
-  +" ,and the temperature feels like: "+res.main.temp+"°F");
+  +" ,and the temperature feels like: "+res.main.temp_max+"°F");
 }
 async function joke(agent){
   const url = "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,racist,sexist,explicit&type=single"
