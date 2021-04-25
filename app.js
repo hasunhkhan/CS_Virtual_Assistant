@@ -12,7 +12,7 @@ const pool = require("./db/db");
 
 //include functions
 const { test, gpa, counselor, professor
-  , allGrades, userInfo } = require(__dirname+"/dialogflow_functions");
+  , allGrades, userInfo, weather, joke } = require(__dirname+"/dialogflow_functions");
 
 const app = express();
 app.use(express.json());
@@ -40,7 +40,8 @@ app.post("/dialogflow",(req, res) =>{
   intentMap.set("professor", professor);
   intentMap.set("allGrades", allGrades);
   intentMap.set("userInfo", userInfo);
-
+  intentMap.set("weather", weather);
+  intentMap.set("joke", joke);
   agent.handleRequest(intentMap);
 });
 

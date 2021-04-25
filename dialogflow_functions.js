@@ -2,6 +2,7 @@
 //queries would be different for each STUDENT
 //currently only working for default. Would need to have a login page or
 //something to select a valid student then change queries to match respective student
+const https = require("https");
 
 async function test(agent){//with 'agent' obj can grab params
   try{
@@ -104,34 +105,41 @@ async function userInfo(agent){
   agent.add("Your information is as follows: CSUB id: "+userid+" , CSUB Email: "+uEmail);
 }
 
-/*async function weather(agent){
+async function weather(agent){
   const query = "Bakersfield";
-  const apiKey = "";
   const unit = "imperial";
-  const url = "https://api.openweathermap.org/data/2.5/weather?q="+query+"&appid="+apiKey+"&units="+unit;
+  const url = "https://api.openweathermap.org/data/2.5/weather?q="+query+"&appid="+apiKey.weather+"&units="+unit;
   console.log(url);
-  https.get(url, function(response){ //on response object
-    console.log("statusCode: ", response.statusCode);
-    //we set encoding to be a specific type
-    //data is an event. emitted by response object. when data event occurs do funct
-    //data is a predefined event by node. we listen for when data occurs
-    //and do the function callback in second argument
-    //wire attached to response object
-    //we listen for when data event occurs
-    //function is attached to named 'data' event
-    //this function is then called synchrnously.
-    //data as arg is any name
-    //we then log the data we get.
-    response.on("data", function(data){
-      const weatherData = JSON.parse(data);
-      const temp = weatherData.weather[0].description; //access specific named values in object
-      console.log(temp);
-    };
-    agent.add("The weather is currently: ");
-  }
-}*/
+  const res = await new Promise((resolve,reject)=> {https.get(url, function(response){ //on response object
+        console.log("statusCode: ", response.statusCode);
+        response.on("data", function(data){
+          const weatherData =  JSON.parse(data);
+          //weather saved in temp
+          //access specific named values in object
+          resolve(weatherData);
+        });
+      });
+    });
+  console.log(res.weather[0].main+"temp: "+res.main.temp);
+  agent.add("The weather in Bakersfield currently is: "+res.weather[0].main
+  +" ,and the temperature feels like: "+res.main.temp+"°F");
+}
+async function joke(agent){
+  const url = "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,racist,sexist,explicit&type=single"
+  const res = await new Promise((resolve,reject)=> {https.get(url, function(response){ //on response object
+        console.log("statusCode: ", response.statusCode);
+        response.on("data", function(data){
+          const joke =  JSON.parse(data);
+          resolve(joke);
+        });
+      });
+    });
+    console.log(res);
+  agent.add(res.joke);
+}
 
 
 module.exports = { test: test, gpa: gpa, counselor: counselor
-  , professor: professor, allGrades: allGrades, userInfo: userInfo};
+  , professor: professor, allGrades: allGrades, userInfo: userInfo, weather: weather, joke: joke};
 const pool = require("./db/db");
+const apiKey = require(__dirname+"/apikeys.js");
