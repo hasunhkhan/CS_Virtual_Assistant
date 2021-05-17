@@ -1,3 +1,21 @@
+11/6/2020
+research on gui frameworks/api's
+google searches:
+	- ui library for react
+	- ui library for c++
+	- ui framework for c++
+
+11/13/2020
+job changed to working on expert system
+goodle searches:
+	- expert system
+	  -looking at wikipedia for information
+	  -ai text book
+
+11/18/2020
+group decided that we dont need an expert system
+helping with database and back-end
+
 2/16/2021
 - created db version 1
 
@@ -35,3 +53,17 @@
   - added four functions that allow removal of data from the db
 - updated EmbeddedSQL.java
   - all of the queries are working now
+
+4/22/2021
+- updated spdb.sql
+  - added one function that allow for removing users from the database
+    - RemoveUser()
+- updated EmbeddedSQL.java
+  - added embedded sql commands to make use of RemoveUser and NewUser functions
+    - query 10 and 11 on the commands page 2
+
+4/23/2021
+- worked on expo poster
+- worked on video
+  - recorded lines for expo video
+
